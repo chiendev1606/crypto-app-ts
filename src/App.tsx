@@ -1,58 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { Routes, Route, Link } from 'react-router-dom';
+import { Layout, Typography, Space } from 'antd';
 import './App.css';
+import Navbar from './components/Navbar';
+import Homepage from './components/Homepage';
+import Exchanges from './components/Exchanges';
+import Cryptocurrencies from './components/Cryptocurrencies';
+import CryptoDetails from './components/CryptoDetails';
+import News from './components/News';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<div className="app">
+			<div className="navbar">
+				<Navbar />
+			</div>
+			<div className="main">
+				<Layout>
+					<div className="routes">
+						<Routes>
+							<Route path="/" element={<Homepage />} />
+							<Route path="/exchanges" element={<Exchanges />} />
+							<Route path="/cryptocurrencies" element={<Cryptocurrencies simplified={false} />} />
+							<Route path="/crypto/:coinId" element={<CryptoDetails />} />
+							<Route path="/news" element={<News simplified={false} />} />
+						</Routes>
+					</div>
+				</Layout>
+				<div className="footer">
+					<Typography.Title level={5} style={{ color: 'white', textAlign: 'center' }}>
+						Cryptoverse <br />
+					</Typography.Title>
+					<Space>
+						<Link to="/">Home</Link>
+						<Link to="/exchanges">Exchanges</Link>
+						<Link to="/news">News</Link>
+					</Space>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default App;
